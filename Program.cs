@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-const string CLIENT_ID = "";
-const string CLIENT_SECRET = "";
+const string CLIENT_ID = @"68193468804-hb1hd7qm6klu2ur8hgudmmhfnjcpeefd.apps.googleusercontent.com";
+const string CLIENT_SECRET = @"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";
 
 var builder = WebApplication.CreateBuilder(args);
 
