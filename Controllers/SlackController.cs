@@ -6,14 +6,17 @@ namespace EzMeetAPI.Controllers;
 [Route("api/[controller]")]
 public class SlackController : Controller
 {
-    [HttpGet]
+    [HttpGet("/menu")]
     public string GetScheduleMenu()
     {
-        return null;
+        var menuFile = Path.Join(AppDomain.CurrentDomain.BaseDirectory, "resources/ScheduleMenu.txt");
+        var menuCode = System.IO.File.ReadAllText(menuFile);
+
+        return menuCode;
     }
 
-    [HttpPost]
-    public void CalendarItem()
+    [HttpPost("/schedule")]
+    public void Schedule()
     {
 
     }
