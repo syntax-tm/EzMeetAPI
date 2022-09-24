@@ -1,4 +1,8 @@
 using EzMeetAPI.Models;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Calendar.v3;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
 using Microsoft.AspNetCore.Mvc;
 using SlackBotMessages.Models;
 
@@ -30,6 +34,28 @@ namespace EzMeetAPI.Controllers
             }
 
             return message;
+        }
+
+        [HttpPost(nameof(Authenticate))]
+        public async void Authenticate()
+        {
+            UserCredential credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
+                new ClientSecrets
+                {
+                    // TODO: NEED REAL DEAL HERE
+                    ClientId = "ID",
+                    ClientSecret = "SECRET"
+                },
+                new[] { CalendarService.Scope.CalendarReadonly, CalendarService.Scope.CalendarEvents },
+                "user",
+                CancellationToken.None);
+
+            // Create the service
+            var service = new CalendarService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = "EzMeet",
+            });
         }
     }
 }
